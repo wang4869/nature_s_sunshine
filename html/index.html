@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>html 5</title>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta http-equiv="x-ua-compatible" content="IE=edge" />
+<!--移动端版本兼容 -->
+<script type="text/javascript">
+	document.write('<meta name="viewport" content="width=640, initial-scale=' + window.screen.width / 640 + ',user-scalable=no, target-densitydpi=device-dpi">');
+</script>
+<!--移动端版本兼容 end -->
+<link href="css/common.css" rel="stylesheet" type="text/css">
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/common.js"></script>
+</head>
+
+<body>
+
+<div class="pageOuter" id="pageOuter">
+	<div class="page page0" style="display: none;"></div>
+	
+	<div class="page page1">
+		<div class="innerDiv">
+			<div class="bgImg page1Bg"></div>
+			<div class="bgImg page1Act">
+				<div class="abs logo"></div>
+				<div class="bgImg indexImg1"></div>
+				<div class="bgImg indexImg2"></div>
+				<div class="bgImg indexImg3"></div>
+				<div class="bgImg indexImg4"></div>
+				<div class="bgImg indexImg5"></div>
+				<div class="bgImg indexImg6"></div>
+				<div class="abs indexIcon1" ontouchend="goPage2();"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="page page2 upShow" style="display: none;">
+		<div class="innerDiv">
+			<div class="bgImg page2Bg"></div>
+			<div class="abs page2Img1" ontouchend="goPage3();"></div>
+		</div>
+	</div>
+	
+	<div class="page page3 upShow" style="display: none;">
+		<div class="innerDiv">
+			<div class="bgImg page3Bg"></div>
+			<input type="text" class="page3Txt page3Txt1" v-model.trim="userName" maxlength="20">
+			<input type="tel" class="page3Txt page3Txt2" v-model.trim="tel" maxlength="11">
+			<input type="text" class="page3Txt page3Txt3" v-model.trim="city" maxlength="20">
+			<div :class="gender===0?'gender gender1 genderOn':'gender gender1'" @click="setGender(0);"></div>
+			<div :class="gender===1?'gender gender2 genderOn':'gender gender2'" @click="setGender(1);"></div>
+			<div class="abs page3Btn" ontouchend="submitInfo();"></div>
+		</div>
+	</div>
+	
+	<div class="page page4 upShow" style="display: none;">
+		<div class="innerDiv">
+			<div class="bgImg page4Bg"></div>
+			
+		</div>
+	</div>
+</div>
+
+<script>
+var infoData={
+	gender:0, // 0男 1女
+	userName:'',
+	tel:'',
+	city:''
+}
+
+var canSubmitInfo=true;
+function submitInfo(){
+	var userName=$.trim(vm.$data.userName);
+	var tel=$.trim(vm.$data.tel);
+	var city=$.trim(vm.$data.city);
+	var gender=parseInt($.trim(vm.$data.gender));
+	var telReg=/^1[34578]\d{9}$/;
+	if(userName==''){
+		alert('请输入姓名');
+		return false;
+	} else if(tel==''||!telReg.test(tel)){
+		alert('请输入正确的手机号');
+		return false;
+	} else if(city==''){
+		alert('请输入城市');
+		return false;
+	} else if(gender!=0&&gender!=1){
+		alert('请选择性别');
+		return false;
+	} else {
+		if(canSubmitInfo){
+			canSubmitInfo=false;
+			//提交
+			goPage4();
+		}
+	}
+}
+</script>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?070e62e94b8f3a8899663b7a57aeb8db";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+</body>
+</html>
